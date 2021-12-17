@@ -14,14 +14,14 @@ class VKUser:
         self.params = {'access_token': token,
                        'v': version}
 
-    def get_photos(self, user_id):
+    def get_photos(self, user_id, count=50):
         profile_photos = dict()
         profile_photo_url = self.url + 'photos.get'
         profile_photo_params = {'owner_id': user_id,
                                 'album_id': 'profile',
                                 'extended': 1,
                                 'photo_sizes': 1,
-                                'count': 5
+                                'count': count
                                 }
 
         response = requests.get(profile_photo_url,
@@ -57,6 +57,7 @@ class YandexDisk:
         headers = self.get_headers()
         params = {'path': folder_name}
         requests.put(url, headers=headers, params=params)
+        return folder_name
 
     def upload_photos_to_disk(self, path_to_file, files_to_upload):
         download_photos_data = []
@@ -83,7 +84,7 @@ def get_photos_info_json(photos_file):
 
 if __name__ == '__main__':
     user1 = VKUser(VK_TOKEN, '5.131')
-    photos = user1.get_photos(390905222)
+    photos = user1.get_photos(390905222, 5)
     ya1 = YandexDisk(YaDisk_TOKEN)
     folder = ya1.create_folder('Photos_from_VK')
 
