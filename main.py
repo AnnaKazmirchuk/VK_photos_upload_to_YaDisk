@@ -84,7 +84,7 @@ def get_photos_info_json(photos_file):
 
 if __name__ == '__main__':
     user1 = VKUser(VK_TOKEN, '5.131')
-    photos = user1.get_photos(390905222, 5)
+    photos = user1.get_photos(..., 5)
     ya1 = YandexDisk(YaDisk_TOKEN)
     folder = ya1.create_folder('Photos_from_VK')
 
